@@ -65,11 +65,6 @@ subprojects {
 
     ktlint {
         verbose.set(true)
-        disabledRules.addAll(
-            "import-ordering",
-            "no-wildcard-imports",
-            "comment-spacing",
-            "filename"
-        )
+        disabledRules.addAll("import-ordering")
     }
 }
