@@ -133,3 +133,31 @@ Daily Coffee 커피 전문점 주문 시스템을 구현한다.
 | 배달 대행사 | delivery agency | 준비한 음식을 고객에게 직접 배달하는 서비스 |
 | 배달 완료 | delivered | 배달원이 주문한 음식을 고객에게 배달 완료한 단계 |
 | 완료 | completed | 배달 및 결제 완료 단계 |
+
+## 모델링
+
+### 상품
+
+- `Product`는 `ID`와 `DisplayedName`, `Price`를 가진다.
+- `DisplayedName`에는 `Profanity`가 포함될 수 없다.
+- `Price`는 0원 이상이어야 한다.
+
+### 메뉴
+
+- `MenuGroup`은 `ID`와 `Name`을 가진다.
+- `Menu`는 특정 `MenuGroup`에 속한다.
+- `Menu`는 `ID`와 `Displayed Name`, `Price`, `MenuProducts`, `Options` 를 가진다.
+- `DisplayedName`에는 `Profanity`가 포함될 수 없다.
+- `Menu`의 가격은 `MenuProducts`의 금액의 합보다 적거나 같아야 한다.
+- `Menu`의 가격이 `MenuProducts`의 금액의 합보다 크면 `NotDisplayedMenu`가 된다.
+- `MenuProduct`는 `Product ID`와 `Price`, `Quantity`를 가진다.
+- `Options`는 `Name`과 `Price`를 가진다.
+
+### 배달 주문
+
+- `Order`는 `ID`, `OrderStatus`, `orderedDateTime`, `DeliveryAddress`, `OrderLineItems`를 가진다.
+- `Menu`가 노출되고 있으며 판매되는 메뉴 가격과 일치하면 `Order`가 생성된다.
+- `Order`는 접수 대기 ➜ 접수 ➜ 서빙 ➜ 배달 ➜ 배달 완료 ➜ 주문 완료 순서로 진행된다.
+- `Order`가 접수되면 `DeliveryAgency`가 호출된다.
+- `OrderLineItem`는 `Price`와 `Quantity` 가진다.
+- `OrderLineItem`의 `Quantity`은 1보다 커야 한다.
