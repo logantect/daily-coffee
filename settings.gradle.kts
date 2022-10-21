@@ -16,4 +16,8 @@ pluginManagement {
         }
     }
 }
-include("daily-coffee-api", "daily-coffee-support:logging")
+include(
+    "daily-coffee-api",
+    "daily-coffee-support:logging",
+    "daily-coffee-support:common"
+)
