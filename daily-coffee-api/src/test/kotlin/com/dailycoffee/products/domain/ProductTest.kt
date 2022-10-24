@@ -13,11 +13,21 @@ internal class ProductTest {
     @Test
     fun `상품을 등록할 수 있다`() {
         val actual = Product(UUID.randomUUID(), DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
+
         assertThat(actual).isNotNull
         assertAll(
             { assertThat(actual.id).isNotNull },
             { assertThat(actual.name).isEqualTo(DisplayedName("아이스 아메리카노", profanityClient)) },
             { assertThat(actual.price).isEqualTo(Price(5_800L)) }
         )
+    }
+
+    @Test
+    fun `상품의 가격을 변경할 수 있다`() {
+        val actual = Product(UUID.randomUUID(), DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
+        val expected = Price(6_000L)
+        actual.changePrice(expected)
+
+        assertThat(actual.price).isEqualTo(expected)
     }
 }
