@@ -10,11 +10,14 @@ class MenuProduct(
     val price: Price,
     val quantity: Quantity,
 ) {
-
     constructor(productId: UUID, price: BigDecimal, quantity: Long) : this(
         IdGenerator.createId(),
         productId,
         Price(price),
         Quantity(quantity),
     )
+
+    fun amount(): Price {
+        return price.times(quantity)
+    }
 }

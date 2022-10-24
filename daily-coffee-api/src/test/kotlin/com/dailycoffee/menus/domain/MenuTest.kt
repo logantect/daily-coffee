@@ -48,4 +48,22 @@ internal class MenuTest {
                 )
             }
     }
+
+    @Test
+    fun `메뉴에 속한 상품 금액의 합은 메뉴의 가격보다 크거나 같아야 한다`() {
+        assertThatIllegalArgumentException()
+            .isThrownBy {
+                val menuGroup = menuGroup("추천")
+                menu(
+                    "아이스 카페 아메리카노 + 조각케익",
+                    BigDecimal.valueOf(12_000L),
+                    true,
+                    menuGroup.id,
+                    listOf(
+                        menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1),
+                        menuProduct(UUID.randomUUID(), BigDecimal.valueOf(6_500L), 1)
+                    )
+                )
+            }
+    }
 }
