@@ -1,5 +1,6 @@
 package com.dailycoffee.products.domain
 
+import com.dailycoffee.utils.IdGenerator
 import java.util.UUID
 
 class Product(
@@ -10,7 +11,7 @@ class Product(
     var price: Price = price
         private set
 
-    constructor(id: UUID, name: DisplayedName, price: Long) : this(id, name, Price(price))
+    constructor(name: DisplayedName, price: Long) : this(IdGenerator.createId(), name, Price(price))
 
     fun changePrice(price: Price) {
         this.price = price
