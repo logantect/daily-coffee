@@ -7,14 +7,14 @@ import java.util.UUID
 class MenuProduct(
     val id: UUID,
     val productId: UUID,
-    val price: BigDecimal,
+    val price: Price,
     val quantity: Quantity,
 ) {
 
     constructor(productId: UUID, price: BigDecimal, quantity: Long) : this(
         IdGenerator.createId(),
         productId,
-        price,
+        Price(price),
         Quantity(quantity),
     )
 }

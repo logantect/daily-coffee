@@ -7,11 +7,13 @@ import java.util.UUID
 class Menu(
     val id: UUID,
     val name: String,
-    val price: BigDecimal,
+    price: Price = Price.ZERO,
     val displayed: Boolean,
     val menuGroupId: UUID,
     val menuProducts: List<MenuProduct>,
 ) {
+    var price: Price = price
+        private set
 
     init {
         require(menuProducts.isNotEmpty())
@@ -26,7 +28,7 @@ class Menu(
     ) : this(
         IdGenerator.createId(),
         name,
-        price,
+        Price(price),
         displayed,
         menuGroupId,
         menuProducts,
