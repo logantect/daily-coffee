@@ -10,14 +10,13 @@ class Menu(
     price: Price = Price.ZERO,
     val displayed: Boolean,
     val menuGroupId: UUID,
-    val menuProducts: List<MenuProduct>,
+    val menuProducts: MenuProducts,
 ) {
     var price: Price = price
         private set
 
     init {
-        require(menuProducts.isNotEmpty())
-        require(totalPrice() >= price)
+        require(menuProducts.isGreaterThanOrEqualsTotalPrice(price))
     }
 
     constructor(
@@ -32,10 +31,6 @@ class Menu(
         Price(price),
         displayed,
         menuGroupId,
-        menuProducts,
+        MenuProducts(menuProducts),
     )
-
-    private fun totalPrice(): Price = menuProducts.stream()
-        .map { it.amount() }
-        .reduce(Price.ZERO, Price::plus)
 }
