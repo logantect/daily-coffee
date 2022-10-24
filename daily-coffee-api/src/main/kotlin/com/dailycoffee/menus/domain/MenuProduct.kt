@@ -8,13 +8,13 @@ class MenuProduct(
     val id: UUID,
     val productId: UUID,
     val price: BigDecimal,
-    val quantity: Long,
+    val quantity: Quantity,
 ) {
 
     constructor(productId: UUID, price: BigDecimal, quantity: Long) : this(
         IdGenerator.createId(),
         productId,
         price,
-        quantity,
+        Quantity(quantity),
     )
 }
