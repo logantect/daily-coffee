@@ -4,6 +4,7 @@ import com.dailycoffee.menu
 import com.dailycoffee.menuGroup
 import com.dailycoffee.menuProduct
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -31,5 +32,20 @@ internal class MenuTest {
             assertThat(actual.menuGroupId).isEqualTo(menuGroup.id)
             assertThat(actual.menuProducts).hasSize(1)
         }.assertAll()
+    }
+
+    @Test
+    fun `상품이 없으면 등록할 수 없다`() {
+        assertThatIllegalArgumentException()
+            .isThrownBy {
+                val menuGroup = menuGroup("추천")
+                menu(
+                    "아이스 카페 아메리카노",
+                    BigDecimal.valueOf(4_500L),
+                    true,
+                    menuGroup.id,
+                    emptyList()
+                )
+            }
     }
 }
