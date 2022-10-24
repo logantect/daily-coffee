@@ -1,7 +1,7 @@
 package com.dailycoffee.utils
 
 import com.fasterxml.uuid.Generators
-import java.util.*
+import java.util.UUID
 
 object IdGenerator {
     private val GENERATOR = Generators.timeBasedGenerator()
