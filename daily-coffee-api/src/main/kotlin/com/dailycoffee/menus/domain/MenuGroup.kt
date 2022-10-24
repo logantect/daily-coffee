@@ -5,14 +5,10 @@ import java.util.UUID
 
 class MenuGroup(
     val id: UUID,
-    name: String,
+    name: MenuGroupName,
 ) {
-    var name: String = name
+    var name: MenuGroupName = name
         private set
 
-    init {
-        require(name.isNotBlank())
-    }
-
-    constructor(name: String) : this(IdGenerator.createId(), name)
+    constructor(name: String) : this(IdGenerator.createId(), MenuGroupName(name))
 }
