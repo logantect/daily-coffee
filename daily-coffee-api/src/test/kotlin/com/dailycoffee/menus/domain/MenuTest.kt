@@ -30,7 +30,7 @@ internal class MenuTest {
             assertThat(actual.price).isEqualTo(Price(4_500L))
             assertThat(actual.displayed).isTrue
             assertThat(actual.menuGroupId).isEqualTo(menuGroup.id)
-            assertThat(actual.menuProducts).hasSize(1)
+            assertThat(actual.menuProducts.menuProducts).hasSize(1)
         }.assertAll()
     }
 

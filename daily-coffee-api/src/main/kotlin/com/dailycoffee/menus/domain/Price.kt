@@ -18,7 +18,7 @@ data class Price(
     }
 
     operator fun plus(price: Price): Price {
-        return Price(amount * price.amount)
+        return Price(amount + price.amount)
     }
 
     operator fun compareTo(price: Price): Int {
