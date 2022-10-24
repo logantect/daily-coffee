@@ -1,10 +1,10 @@
 package com.dailycoffee.products.domain
 
+import com.dailycoffee.product
 import com.dailycoffee.products.infra.FakeProfanityClient
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import java.util.UUID
 
 internal class ProductTest {
 
@@ -12,7 +12,7 @@ internal class ProductTest {
 
     @Test
     fun `상품을 등록할 수 있다`() {
-        val actual = Product(UUID.randomUUID(), DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
+        val actual = product(DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
 
         assertThat(actual).isNotNull
         assertAll(
@@ -24,7 +24,7 @@ internal class ProductTest {
 
     @Test
     fun `상품의 가격을 변경할 수 있다`() {
-        val actual = Product(UUID.randomUUID(), DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
+        val actual = product(DisplayedName("아이스 아메리카노", profanityClient), 5_800L)
         val expected = Price(6_000L)
         actual.changePrice(expected)
 
