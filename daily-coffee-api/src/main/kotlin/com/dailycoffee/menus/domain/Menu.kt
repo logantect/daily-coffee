@@ -17,6 +17,7 @@ class Menu(
 
     init {
         require(menuProducts.isNotEmpty())
+        require(totalPrice() >= price)
     }
 
     constructor(
@@ -33,4 +34,8 @@ class Menu(
         menuGroupId,
         menuProducts,
     )
+
+    private fun totalPrice(): Price = menuProducts.stream()
+        .map { it.amount() }
+        .reduce(Price.ZERO, Price::plus)
 }

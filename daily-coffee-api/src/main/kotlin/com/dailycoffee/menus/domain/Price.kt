@@ -13,6 +13,18 @@ data class Price(
 
     constructor(amount: Long) : this(BigDecimal.valueOf(amount))
 
+    operator fun times(quantity: Quantity): Price {
+        return Price(amount * BigDecimal.valueOf(quantity.quantity))
+    }
+
+    operator fun plus(price: Price): Price {
+        return Price(amount * price.amount)
+    }
+
+    operator fun compareTo(price: Price): Int {
+        return amount.compareTo(price.amount)
+    }
+
     companion object {
         val ZERO = Price(ZERO_NUMBER)
     }
