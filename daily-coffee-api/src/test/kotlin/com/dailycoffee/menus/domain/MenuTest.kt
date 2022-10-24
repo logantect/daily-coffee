@@ -27,7 +27,7 @@ internal class MenuTest {
         SoftAssertions().apply {
             assertThat(actual.id).isNotNull
             assertThat(actual.name).isEqualTo("아이스 카페 아메리카노")
-            assertThat(actual.price).isEqualTo(BigDecimal.valueOf(4_500L))
+            assertThat(actual.price).isEqualTo(Price(4_500L))
             assertThat(actual.displayed).isTrue
             assertThat(actual.menuGroupId).isEqualTo(menuGroup.id)
             assertThat(actual.menuProducts).hasSize(1)
