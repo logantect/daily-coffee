@@ -13,6 +13,10 @@ class Menu(
     val menuProducts: List<MenuProduct>,
 ) {
 
+    init {
+        require(menuProducts.isNotEmpty())
+    }
+
     constructor(
         name: String,
         price: BigDecimal,
