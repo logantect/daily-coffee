@@ -34,7 +34,7 @@ class Menu(
         Price(price),
         displayed,
         menuGroupId,
-        MenuProducts(menuProducts),
+        MenuProducts(menuProducts.toMutableList()),
     )
 
     fun changePrice(price: Price) {
@@ -43,7 +43,16 @@ class Menu(
     }
 
     fun display() {
+        validatePrice(price)
         this.displayed = true
+    }
+
+    fun addMenuProduct(menuProduct: MenuProduct) {
+        menuProducts.addMenuProduct(menuProduct)
+    }
+
+    fun removeMenuProduct(menuProduct: MenuProduct) {
+        menuProducts.removeMenuProduct(menuProduct)
     }
 
     private fun validatePrice(price: Price) {
