@@ -8,11 +8,14 @@ class Menu(
     val id: UUID,
     val name: String,
     price: Price = Price.ZERO,
-    val displayed: Boolean,
+    displayed: Boolean,
     val menuGroupId: UUID,
     val menuProducts: MenuProducts,
 ) {
     var price: Price = price
+        private set
+
+    var displayed: Boolean = displayed
         private set
 
     init {
@@ -37,6 +40,10 @@ class Menu(
     fun changePrice(price: Price) {
         validatePrice(price)
         this.price = price
+    }
+
+    fun display() {
+        this.displayed = true
     }
 
     private fun validatePrice(price: Price) {

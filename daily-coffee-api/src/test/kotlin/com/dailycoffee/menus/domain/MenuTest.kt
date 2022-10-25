@@ -109,4 +109,23 @@ internal class MenuTest {
                 }
         }
     }
+
+    @Nested
+    @DisplayName("메뉴 공개")
+    inner class DisplayMenu {
+        @Test
+        fun `메뉴를 공개할 수 있다`() {
+            val menuGroup = menuGroup("추천")
+            val actual = menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                false,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.display()
+
+            assertThat(actual.displayed).isTrue
+        }
+    }
 }
