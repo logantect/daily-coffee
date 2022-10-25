@@ -148,4 +148,23 @@ internal class MenuTest {
                 }
         }
     }
+
+    @Nested
+    @DisplayName("메뉴 숨김")
+    inner class HideMenu {
+        @Test
+        fun `메뉴를 숨길 수 있다`() {
+            val menuGroup = menuGroup("추천")
+            val actual = menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                false,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.hide()
+
+            assertThat(actual.displayed).isFalse
+        }
+    }
 }

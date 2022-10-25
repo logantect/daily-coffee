@@ -47,6 +47,10 @@ class Menu(
         this.displayed = true
     }
 
+    fun hide() {
+        this.displayed = false
+    }
+
     fun addMenuProduct(menuProduct: MenuProduct) {
         menuProducts.addMenuProduct(menuProduct)
     }
