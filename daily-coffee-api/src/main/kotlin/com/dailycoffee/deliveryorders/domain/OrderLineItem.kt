@@ -7,13 +7,13 @@ import java.util.UUID
 class OrderLineItem(
     val id: UUID,
     val menuId: UUID,
-    val price: BigDecimal,
+    val price: Price,
     val quantity: Quantity
 ) {
     constructor(menuId: UUID, price: BigDecimal, quantity: Long) : this(
         IdGenerator.createId(),
         menuId,
-        price,
+        Price(price),
         Quantity(quantity)
     )
 }
