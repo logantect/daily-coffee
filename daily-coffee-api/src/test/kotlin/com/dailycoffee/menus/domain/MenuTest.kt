@@ -91,5 +91,22 @@ internal class MenuTest {
 
             assertThat(actual.price).isEqualTo(expected)
         }
+
+        @Test
+        fun `메뉴에 속한 상품 금액의 합은 메뉴의 가격보다 크거나 같아야 한다`() {
+            val menuGroup = menuGroup("추천")
+            val actual = menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                true,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.changePrice(Price(4_600L))
+                }
+        }
     }
 }
