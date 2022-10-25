@@ -47,8 +47,13 @@ class Order(
         this.status = OrderStatus.SERVED
     }
 
-    fun deliveryStart() {
+    fun startDelivery() {
         require(status.isServed())
         this.status = OrderStatus.DELIVERING
+    }
+
+    fun completeDelivery() {
+        require(status.isDelivering())
+        this.status = OrderStatus.DELIVERED
     }
 }
