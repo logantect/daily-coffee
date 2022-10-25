@@ -2,9 +2,11 @@ package com.dailycoffee.menus.domain
 
 import com.dailycoffee.menuGroup
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
+@DisplayName("메뉴 그룹 테스트")
 internal class MenuGroupTest {
 
     @Test

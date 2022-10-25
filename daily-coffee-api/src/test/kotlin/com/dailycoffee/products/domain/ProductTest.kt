@@ -3,9 +3,11 @@ package com.dailycoffee.products.domain
 import com.dailycoffee.product
 import com.dailycoffee.products.infra.FakeProfanityClient
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
+@DisplayName("상품 테스트")
 internal class ProductTest {
 
     private val profanityClient = FakeProfanityClient()

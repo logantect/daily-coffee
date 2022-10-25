@@ -3,10 +3,12 @@ package com.dailycoffee.products.domain
 import com.dailycoffee.products.infra.FakeProfanityClient
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
+@DisplayName("상품 이름 테스트")
 internal class DisplayedNameTest {
 
     private val profanityClient = FakeProfanityClient()
