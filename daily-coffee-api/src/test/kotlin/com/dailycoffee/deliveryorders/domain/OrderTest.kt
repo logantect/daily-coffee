@@ -1,5 +1,7 @@
 package com.dailycoffee.deliveryorders.domain
 
+import com.dailycoffee.order
+import com.dailycoffee.orderLineItem
 import com.dailycoffee.utils.IdGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
@@ -10,7 +12,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import java.math.BigDecimal
-import java.util.UUID
 
 @DisplayName("주문 테스트")
 internal class OrderTest {
@@ -52,17 +53,5 @@ internal class OrderTest {
                     order(listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), -1)))
                 }
         }
-    }
-
-    fun order(orderLineItems: List<OrderLineItem>): Order {
-        return Order("서울특별시 강남구 논현로 656", orderLineItems)
-    }
-
-    fun order(deliveryAddress: String, orderLineItems: List<OrderLineItem>): Order {
-        return Order(deliveryAddress, orderLineItems)
-    }
-
-    fun orderLineItem(menuId: UUID, price: BigDecimal, quantity: Long): OrderLineItem {
-        return OrderLineItem(menuId, price, quantity)
     }
 }
