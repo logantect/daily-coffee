@@ -2,11 +2,13 @@ package com.dailycoffee.menus.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.math.BigDecimal
 
+@DisplayName("메뉴 가격 테스트")
 internal class PriceTest {
 
     @ParameterizedTest

@@ -1,8 +1,10 @@
 package com.dailycoffee.menus.domain
 
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
+@DisplayName("메뉴 수량 테스트")
 internal class QuantityTest {
 
     @Test

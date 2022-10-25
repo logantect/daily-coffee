@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.util.UUID
 
+@DisplayName("메뉴 테스트")
 internal class MenuTest {
 
     @Nested
