@@ -127,5 +127,25 @@ internal class MenuTest {
 
             assertThat(actual.displayed).isTrue
         }
+
+        @Test
+        fun `메뉴의 가격이 메뉴에 속한 상품 금액의 합보다 높을 경우 메뉴를 공개할 수 없다`() {
+            val menuGroup = menuGroup("추천")
+            val productId = UUID.randomUUID()
+            val actual = menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                false,
+                menuGroup.id,
+                listOf(menuProduct(productId, BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.removeMenuProduct(menuProduct(productId, BigDecimal.valueOf(4_500L), 1))
+            actual.addMenuProduct(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_000L), 1))
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.display()
+                }
+        }
     }
 }
