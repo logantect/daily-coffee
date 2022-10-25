@@ -48,6 +48,7 @@ class Order(
     }
 
     fun deliveryStart() {
+        require(status.isServed())
         this.status = OrderStatus.DELIVERING
     }
 }

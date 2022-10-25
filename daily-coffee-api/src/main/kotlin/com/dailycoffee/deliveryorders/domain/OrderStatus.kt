@@ -10,4 +10,8 @@ enum class OrderStatus {
     fun isAccepted(): Boolean {
         return this == ACCEPTED
     }
+
+    fun isServed(): Boolean {
+        return this == SERVED
+    }
 }
