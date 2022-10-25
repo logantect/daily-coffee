@@ -1,6 +1,7 @@
 package com.dailycoffee.products.domain
 
 import com.dailycoffee.utils.IdGenerator
+import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Embedded
@@ -18,6 +19,8 @@ class Product(
     @Embedded
     var price: Price = price
         protected set
+
+    constructor(name: DisplayedName, price: BigDecimal) : this(IdGenerator.createId(), name, Price(price))
 
     constructor(name: DisplayedName, price: Long) : this(IdGenerator.createId(), name, Price(price))
 
