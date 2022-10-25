@@ -16,7 +16,7 @@ class Menu(
         private set
 
     init {
-        require(menuProducts.isGreaterThanOrEqualsTotalPrice(price))
+        validatePrice(price)
     }
 
     constructor(
@@ -33,4 +33,13 @@ class Menu(
         menuGroupId,
         MenuProducts(menuProducts),
     )
+
+    fun changePrice(price: Price) {
+        validatePrice(price)
+        this.price = price
+    }
+
+    private fun validatePrice(price: Price) {
+        require(menuProducts.isGreaterThanOrEqualsTotalPrice(price))
+    }
 }
