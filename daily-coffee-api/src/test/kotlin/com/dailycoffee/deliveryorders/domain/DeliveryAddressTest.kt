@@ -2,10 +2,12 @@ package com.dailycoffee.deliveryorders.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 
+@DisplayName("배달 주소 테스트")
 internal class DeliveryAddressTest {
 
     @Test
