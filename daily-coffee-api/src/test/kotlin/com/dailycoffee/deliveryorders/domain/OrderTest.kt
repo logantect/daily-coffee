@@ -189,5 +189,19 @@ internal class OrderTest {
 
             assertThat(actual.status).isEqualTo(OrderStatus.COMPLETED)
         }
+
+        @EnumSource(value = OrderStatus::class, names = ["DELIVERED"], mode = EnumSource.Mode.EXCLUDE)
+        @ParameterizedTest
+        fun `주문 배달 완료된 주문만 주문 완료할 수 있다`(status: OrderStatus) {
+            val actual = order(
+                status,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.complete()
+                }
+        }
     }
 }

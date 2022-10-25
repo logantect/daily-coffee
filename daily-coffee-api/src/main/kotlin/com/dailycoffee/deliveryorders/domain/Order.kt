@@ -58,6 +58,7 @@ class Order(
     }
 
     fun complete() {
+        require(status.isDelivered())
         this.status = OrderStatus.COMPLETED
     }
 }

@@ -18,4 +18,8 @@ enum class OrderStatus {
     fun isDelivering(): Boolean {
         return this == DELIVERING
     }
+
+    fun isDelivered(): Boolean {
+        return this == DELIVERED
+    }
 }
