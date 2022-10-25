@@ -44,6 +44,18 @@ internal class OrderTest {
                     )
                 }
         }
+
+        @Test
+        fun `주문 항목의 수량은 0 이상이어야 한다`() {
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    order(listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), -1)))
+                }
+        }
+    }
+
+    fun order(orderLineItems: List<OrderLineItem>): Order {
+        return Order("서울특별시 강남구 논현로 656", orderLineItems)
     }
 
     fun order(deliveryAddress: String, orderLineItems: List<OrderLineItem>): Order {
