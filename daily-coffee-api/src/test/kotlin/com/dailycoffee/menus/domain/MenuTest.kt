@@ -66,4 +66,20 @@ internal class MenuTest {
                 )
             }
     }
+
+    @Test
+    fun `메뉴의 가격을 변경할 수 있다`() {
+        val menuGroup = menuGroup("추천")
+        val actual = menu(
+            "아이스 카페 아메리카노",
+            BigDecimal.valueOf(4_500L),
+            true,
+            menuGroup.id,
+            listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+        )
+        val expected = Price(4_000L)
+        actual.changePrice(expected)
+
+        assertThat(actual.price).isEqualTo(expected)
+    }
 }
