@@ -8,7 +8,7 @@ class Order(
     val id: UUID,
     val status: OrderStatus,
     val orderDateTime: ZonedDateTime,
-    val deliveryAddress: String,
+    val deliveryAddress: DeliveryAddress,
     val orderLineItems: OrderLineItems,
 ) {
     constructor(
@@ -18,7 +18,7 @@ class Order(
         IdGenerator.createId(),
         OrderStatus.WAITING,
         ZonedDateTime.now(),
-        deliveryAddress,
+        DeliveryAddress(deliveryAddress),
         OrderLineItems(orderLineItems.toMutableList())
     )
 
@@ -30,7 +30,7 @@ class Order(
         IdGenerator.createId(),
         status,
         ZonedDateTime.now(),
-        deliveryAddress,
+        DeliveryAddress(deliveryAddress),
         OrderLineItems(orderLineItems.toMutableList())
     )
 }
