@@ -8,8 +8,12 @@ class OrderLineItem(
     val id: UUID,
     val menuId: UUID,
     val price: BigDecimal,
-    val quantity: Long
+    val quantity: Quantity
 ) {
-
-    constructor(menuId: UUID, price: BigDecimal, quantity: Long) : this(IdGenerator.createId(), menuId, price, quantity)
+    constructor(menuId: UUID, price: BigDecimal, quantity: Long) : this(
+        IdGenerator.createId(),
+        menuId,
+        price,
+        Quantity(quantity)
+    )
 }
