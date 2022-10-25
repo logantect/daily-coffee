@@ -14,6 +14,10 @@ fun order(deliveryAddress: String, orderLineItems: List<OrderLineItem>): Order {
     return Order(deliveryAddress, orderLineItems)
 }
 
+fun order(status: OrderStatus, orderLineItems: List<OrderLineItem>): Order {
+    return order(status, "서울특별시 강남구 논현로 656", orderLineItems)
+}
+
 fun order(status: OrderStatus, deliveryAddress: String, orderLineItems: List<OrderLineItem>): Order {
     return Order(status, deliveryAddress, orderLineItems)
 }

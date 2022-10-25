@@ -63,7 +63,6 @@ internal class OrderTest {
         @Test
         fun `주문을 접수한다`() {
             val actual = order(
-                "서울특별시 강남구 논현로 656",
                 listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
             )
             actual.accept()
@@ -76,13 +75,42 @@ internal class OrderTest {
         fun `접수 대기 중인 주문만 접수할 수 있다`(status: OrderStatus) {
             val actual = order(
                 status,
-                "서울특별시 강남구 논현로 656",
                 listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
             )
 
             assertThatIllegalArgumentException()
                 .isThrownBy {
                     actual.accept()
+                }
+        }
+    }
+
+    @Nested
+    @DisplayName("주문 준비")
+    inner class OrderServing {
+
+        @Test
+        fun `주문을 배송 가능한 상태로 준비한다`() {
+            val actual = order(
+                OrderStatus.ACCEPTED,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.serve()
+
+            assertThat(actual.status).isEqualTo(OrderStatus.SERVED)
+        }
+
+        @EnumSource(value = OrderStatus::class, names = ["ACCEPTED"], mode = EnumSource.Mode.EXCLUDE)
+        @ParameterizedTest
+        fun `접수된 주문만 준비할 수 있다`(status: OrderStatus) {
+            val actual = order(
+                status,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.serve()
                 }
         }
     }

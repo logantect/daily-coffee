@@ -41,4 +41,9 @@ class Order(
         require(status.isWaiting())
         this.status = OrderStatus.ACCEPTED
     }
+
+    fun serve() {
+        require(status.isAccepted())
+        this.status = OrderStatus.SERVED
+    }
 }
