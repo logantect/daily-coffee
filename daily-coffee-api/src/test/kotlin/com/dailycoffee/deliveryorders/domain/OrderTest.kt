@@ -174,4 +174,20 @@ internal class OrderTest {
                 }
         }
     }
+
+    @Nested
+    @DisplayName("주문 완료")
+    inner class OrderCompleted {
+
+        @Test
+        fun `주문을 완료한다`() {
+            val actual = order(
+                OrderStatus.DELIVERED,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.complete()
+
+            assertThat(actual.status).isEqualTo(OrderStatus.COMPLETED)
+        }
+    }
 }
