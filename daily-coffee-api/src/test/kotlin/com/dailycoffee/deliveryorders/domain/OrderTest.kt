@@ -54,4 +54,20 @@ internal class OrderTest {
                 }
         }
     }
+
+    @Nested
+    @DisplayName("주문 접수")
+    inner class OrderAccept {
+
+        @Test
+        fun `주문을 접수한다`() {
+            val actual = order(
+                "서울특별시 강남구 논현로 656",
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.accept()
+
+            assertThat(actual.status).isEqualTo(OrderStatus.ACCEPTED)
+        }
+    }
 }

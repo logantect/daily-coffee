@@ -6,11 +6,14 @@ import java.util.UUID
 
 class Order(
     val id: UUID,
-    val status: OrderStatus,
+    status: OrderStatus,
     val orderDateTime: ZonedDateTime,
     val deliveryAddress: DeliveryAddress,
     val orderLineItems: OrderLineItems,
 ) {
+    var status: OrderStatus = status
+        private set
+
     constructor(
         deliveryAddress: String,
         orderLineItems: List<OrderLineItem>
@@ -33,4 +36,8 @@ class Order(
         DeliveryAddress(deliveryAddress),
         OrderLineItems(orderLineItems.toMutableList())
     )
+
+    fun accept() {
+        this.status = OrderStatus.ACCEPTED
+    }
 }
