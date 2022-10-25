@@ -14,4 +14,8 @@ enum class OrderStatus {
     fun isServed(): Boolean {
         return this == SERVED
     }
+
+    fun isDelivering(): Boolean {
+        return this == DELIVERING
+    }
 }

@@ -125,7 +125,7 @@ internal class OrderTest {
                 OrderStatus.SERVED,
                 listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
             )
-            actual.deliveryStart()
+            actual.startDelivery()
 
             assertThat(actual.status).isEqualTo(OrderStatus.DELIVERING)
         }
@@ -140,7 +140,37 @@ internal class OrderTest {
 
             assertThatIllegalArgumentException()
                 .isThrownBy {
-                    actual.deliveryStart()
+                    actual.startDelivery()
+                }
+        }
+    }
+
+    @Nested
+    @DisplayName("주문 배달 완료")
+    inner class OrderDelivered {
+
+        @Test
+        fun `주문을 배달 완료한다`() {
+            val actual = order(
+                OrderStatus.DELIVERING,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.completeDelivery()
+
+            assertThat(actual.status).isEqualTo(OrderStatus.DELIVERED)
+        }
+
+        @EnumSource(value = OrderStatus::class, names = ["DELIVERING"], mode = EnumSource.Mode.EXCLUDE)
+        @ParameterizedTest
+        fun `배달 중인 주문만 배달 완료할 수 있다`(status: OrderStatus) {
+            val actual = order(
+                status,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.completeDelivery()
                 }
         }
     }
