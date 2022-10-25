@@ -1,9 +1,13 @@
 package com.dailycoffee.deliveryorders.domain
 
 enum class OrderStatus {
-    WAITING, COMPLETED, SERVED, ACCEPTED;
+    WAITING, ACCEPTED, SERVED, COMPLETED;
 
     fun isWaiting(): Boolean {
         return this == WAITING
+    }
+
+    fun isAccepted(): Boolean {
+        return this == ACCEPTED
     }
 }
