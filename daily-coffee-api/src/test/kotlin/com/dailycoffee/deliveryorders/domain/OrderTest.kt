@@ -122,12 +122,26 @@ internal class OrderTest {
         @Test
         fun `주문을 배달한다`() {
             val actual = order(
-                OrderStatus.ACCEPTED,
+                OrderStatus.SERVED,
                 listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
             )
             actual.deliveryStart()
 
             assertThat(actual.status).isEqualTo(OrderStatus.DELIVERING)
+        }
+
+        @EnumSource(value = OrderStatus::class, names = ["SERVED"], mode = EnumSource.Mode.EXCLUDE)
+        @ParameterizedTest
+        fun `준비된 주문만 배달할 수 있다`(status: OrderStatus) {
+            val actual = order(
+                status,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.deliveryStart()
+                }
         }
     }
 }
