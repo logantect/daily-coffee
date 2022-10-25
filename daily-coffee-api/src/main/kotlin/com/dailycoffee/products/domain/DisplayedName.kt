@@ -1,8 +1,12 @@
 package com.dailycoffee.products.domain
 
+import javax.persistence.Column
+import javax.persistence.Embeddable
+
+@Embeddable
 data class DisplayedName(
-    private val name: String,
-    private val profanityClient: ProfanityClient
+    @Column(nullable = false) private val name: String,
+    @field:Transient private val profanityClient: ProfanityClient
 ) {
     init {
         require(!profanityClient.containsProfanity(name))
