@@ -114,4 +114,20 @@ internal class OrderTest {
                 }
         }
     }
+
+    @Nested
+    @DisplayName("주문 배달")
+    inner class OrderDelivering {
+
+        @Test
+        fun `주문을 배달한다`() {
+            val actual = order(
+                OrderStatus.ACCEPTED,
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+            actual.deliveryStart()
+
+            assertThat(actual.status).isEqualTo(OrderStatus.DELIVERING)
+        }
+    }
 }

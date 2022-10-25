@@ -46,4 +46,8 @@ class Order(
         require(status.isAccepted())
         this.status = OrderStatus.SERVED
     }
+
+    fun deliveryStart() {
+        this.status = OrderStatus.DELIVERING
+    }
 }
