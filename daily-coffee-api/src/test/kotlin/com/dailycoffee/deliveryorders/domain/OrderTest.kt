@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
+import org.junit.jupiter.params.provider.EnumSource
 import java.math.BigDecimal
 
 @DisplayName("주문 테스트")
@@ -68,6 +69,21 @@ internal class OrderTest {
             actual.accept()
 
             assertThat(actual.status).isEqualTo(OrderStatus.ACCEPTED)
+        }
+
+        @EnumSource(value = OrderStatus::class, names = ["WAITING"], mode = EnumSource.Mode.EXCLUDE)
+        @ParameterizedTest
+        fun `접수 대기 중인 주문만 접수할 수 있다`(status: OrderStatus) {
+            val actual = order(
+                status,
+                "서울특별시 강남구 논현로 656",
+                listOf(orderLineItem(IdGenerator.createId(), BigDecimal.valueOf(4_500L), 1))
+            )
+
+            assertThatIllegalArgumentException()
+                .isThrownBy {
+                    actual.accept()
+                }
         }
     }
 }

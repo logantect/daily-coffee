@@ -38,6 +38,7 @@ class Order(
     )
 
     fun accept() {
+        require(status.isWaiting())
         this.status = OrderStatus.ACCEPTED
     }
 }
