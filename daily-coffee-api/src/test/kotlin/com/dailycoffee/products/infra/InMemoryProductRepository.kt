@@ -15,12 +15,12 @@ class InMemoryProductRepository : ProductRepository {
         return Optional.ofNullable(storage[id])
     }
 
-    override fun findByIdOrNull(id: UUID): Product? {
-        return storage[id]
-    }
-
     override fun findAll(): List<Product> {
         return storage.values.toList()
+    }
+
+    override fun deleteAll() {
+        storage.clear()
     }
 
     companion object {
