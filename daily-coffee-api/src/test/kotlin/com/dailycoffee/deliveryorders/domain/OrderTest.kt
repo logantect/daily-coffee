@@ -2,7 +2,7 @@ package com.dailycoffee.deliveryorders.domain
 
 import com.dailycoffee.order
 import com.dailycoffee.orderLineItem
-import com.dailycoffee.utils.IdGenerator
+import com.dailycoffee.support.utils.IdGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.SoftAssertions
