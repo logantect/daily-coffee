@@ -8,6 +8,7 @@ import com.dailycoffee.products.infra.FakeProfanityClient
 import com.dailycoffee.products.infra.InMemoryProductRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.groups.Tuple.tuple
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -26,6 +27,11 @@ internal class ProductServiceTest {
         profanityClient = FakeProfanityClient()
         productRepository = InMemoryProductRepository()
         productService = ProductService(productRepository, profanityClient)
+    }
+
+    @AfterEach
+    internal fun tearDown() {
+        productRepository.deleteAll()
     }
 
     @Nested

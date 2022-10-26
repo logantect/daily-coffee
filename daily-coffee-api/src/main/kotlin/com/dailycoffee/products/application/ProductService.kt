@@ -5,6 +5,7 @@ import com.dailycoffee.products.domain.Price
 import com.dailycoffee.products.domain.Product
 import com.dailycoffee.products.domain.ProductRepository
 import com.dailycoffee.products.domain.ProfanityClient
+import com.dailycoffee.products.domain.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
