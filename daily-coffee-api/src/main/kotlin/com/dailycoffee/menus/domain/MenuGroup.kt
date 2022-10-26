@@ -1,6 +1,6 @@
 package com.dailycoffee.menus.domain
 
-import com.dailycoffee.utils.IdGenerator
+import com.dailycoffee.support.utils.IdGenerator
 import java.util.UUID
 
 class MenuGroup(

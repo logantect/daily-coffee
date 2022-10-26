@@ -1,4 +1,4 @@
-package com.dailycoffee.utils
+package com.dailycoffee.support.utils
 
 import com.fasterxml.uuid.Generators
 import java.util.UUID

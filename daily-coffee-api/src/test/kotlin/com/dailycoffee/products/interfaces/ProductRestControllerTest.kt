@@ -56,4 +56,23 @@ class ProductRestControllerTest(
             log().all()
         }
     }
+
+    @Test
+    fun `상품 가격 변경 요청에 응답으로 200 OK를 반환한다`() {
+        val request = CreateProductRequest(
+            name = "아이스 카페 아메리카노",
+            price = BigDecimal.valueOf(4_500L),
+        )
+
+        Given {
+            contentType(ContentType.JSON)
+            body(request)
+            log().all()
+        } When {
+            post("/api/v1/products")
+        } Then {
+            statusCode(HttpStatus.SC_OK)
+            log().all()
+        }
+    }
 }

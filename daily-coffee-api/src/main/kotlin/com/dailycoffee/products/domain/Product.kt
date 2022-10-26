@@ -1,6 +1,6 @@
 package com.dailycoffee.products.domain
 
-import com.dailycoffee.utils.IdGenerator
+import com.dailycoffee.support.utils.IdGenerator
 import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.Column
