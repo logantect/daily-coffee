@@ -41,7 +41,7 @@ internal class ProductServiceTest {
         @Test
         fun `상품을 등록할 수 있다`() {
             val actual = productService.create(
-                ProductCreateCommand(
+                CreateProductRequest(
                     name = "아이스 카페 아메리카노",
                     price = BigDecimal.valueOf(4_500L),
                 )
@@ -59,7 +59,7 @@ internal class ProductServiceTest {
         @Test
         fun `상품의 가격을 변경할 수 있다`() {
             val actual = productService.create(
-                ProductCreateCommand(
+                CreateProductRequest(
                     name = "아이스 카페 아메리카노",
                     price = BigDecimal.valueOf(4_500L),
                 )

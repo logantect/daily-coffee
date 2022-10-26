@@ -16,7 +16,7 @@ class ProductService(
     private val productRepository: ProductRepository,
     private val profanityClient: ProfanityClient,
 ) {
-    fun create(command: ProductCreateCommand): ProductResponse {
+    fun create(command: CreateProductRequest): ProductResponse {
         val product = productRepository.save(
             Product(
                 name = DisplayedName(command.name, profanityClient),
