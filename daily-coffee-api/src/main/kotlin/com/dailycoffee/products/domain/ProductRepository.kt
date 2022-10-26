@@ -8,5 +8,7 @@ interface ProductRepository {
 
     fun findById(id: UUID): Optional<Product>
 
+    fun findByIdOrNull(id: UUID): Product?
+
     fun findAll(): List<Product>
 }
