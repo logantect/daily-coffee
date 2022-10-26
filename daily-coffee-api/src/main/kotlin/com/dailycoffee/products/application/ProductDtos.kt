@@ -6,7 +6,7 @@ import com.dailycoffee.products.domain.Product
 import java.math.BigDecimal
 import java.util.UUID
 
-data class ProductCreateCommand(
+data class CreateProductRequest(
     val name: String,
     val price: BigDecimal
 )
