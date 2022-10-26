@@ -9,6 +9,10 @@ data class CreateProductRequest(
     val price: BigDecimal
 )
 
+data class ChangePriceRequest(
+    val price: BigDecimal
+)
+
 data class ProductResponse(
     val id: UUID,
     val name: String,
