@@ -1,6 +1,8 @@
 package com.dailycoffee.products.interfaces
 
+import com.dailycoffee.products.application.ChangePriceRequest
 import com.dailycoffee.products.application.CreateProductRequest
+import com.dailycoffee.products.application.ProductService
 import com.dailycoffee.products.domain.ProductRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
@@ -24,6 +26,7 @@ import java.math.BigDecimal
 class ProductRestControllerTest(
     @LocalServerPort private val port: Int,
     private val productRepository: ProductRepository,
+    private val productService: ProductService,
 ) {
     @BeforeEach
     internal fun setUp() {
@@ -59,9 +62,15 @@ class ProductRestControllerTest(
 
     @Test
     fun `상품 가격 변경 요청에 응답으로 200 OK를 반환한다`() {
-        val request = CreateProductRequest(
-            name = "아이스 카페 아메리카노",
-            price = BigDecimal.valueOf(4_500L),
+        val existed = productService.create(
+            CreateProductRequest(
+                name = "아이스 카페 아메리카노",
+                price = BigDecimal.valueOf(4_500L),
+            )
+        )
+
+        val request = ChangePriceRequest(
+            price = BigDecimal.valueOf(5_500L)
         )
 
         Given {
@@ -69,7 +78,7 @@ class ProductRestControllerTest(
             body(request)
             log().all()
         } When {
-            post("/api/v1/products")
+            patch("/api/v1/products/{productId}/price", existed.id)
         } Then {
             statusCode(HttpStatus.SC_OK)
             log().all()

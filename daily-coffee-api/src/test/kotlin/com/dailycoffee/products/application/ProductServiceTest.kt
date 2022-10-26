@@ -47,8 +47,8 @@ internal class ProductServiceTest {
                 )
             )
             assertThat(actual.id).isNotNull
-            assertThat(actual.name).isEqualTo(DisplayedName("아이스 카페 아메리카노", profanityClient))
-            assertThat(actual.price).isEqualTo(Price(4_500L))
+            assertThat(actual.name).isEqualTo("아이스 카페 아메리카노")
+            assertThat(actual.price).isEqualTo(BigDecimal.valueOf(4_500L))
         }
     }
 
@@ -81,8 +81,8 @@ internal class ProductServiceTest {
             assertThat(actual).hasSize(2)
             assertThat(actual).map(ProductResponse::name, ProductResponse::price)
                 .contains(
-                    tuple(DisplayedName("아이스 아메리카노", profanityClient), Price(5_800L)),
-                    tuple(DisplayedName("아이스 카페라떼", profanityClient), Price(6_000L)),
+                    tuple("아이스 아메리카노", BigDecimal.valueOf(5_800L)),
+                    tuple("아이스 카페라떼", BigDecimal.valueOf(6_000L)),
                 )
         }
     }
