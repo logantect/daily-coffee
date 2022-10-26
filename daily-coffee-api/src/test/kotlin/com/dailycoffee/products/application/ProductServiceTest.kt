@@ -1,10 +1,13 @@
 package com.dailycoffee.products.application
 
+import com.dailycoffee.product
 import com.dailycoffee.products.domain.DisplayedName
 import com.dailycoffee.products.domain.Price
+import com.dailycoffee.products.domain.ProductRepository
 import com.dailycoffee.products.infra.FakeProfanityClient
 import com.dailycoffee.products.infra.InMemoryProductRepository
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.groups.Tuple.tuple
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -15,12 +18,14 @@ import java.math.BigDecimal
 @DisplayName("상품 서비스 테스트")
 internal class ProductServiceTest {
     lateinit var productService: ProductService
+    lateinit var productRepository: ProductRepository
     lateinit var profanityClient: FakeProfanityClient
 
     @BeforeEach
     fun setUp() {
         profanityClient = FakeProfanityClient()
-        productService = ProductService(InMemoryProductRepository(), profanityClient)
+        productRepository = InMemoryProductRepository()
+        productService = ProductService(productRepository, profanityClient)
     }
 
     @Nested
@@ -54,6 +59,25 @@ internal class ProductServiceTest {
                 )
             )
             assertDoesNotThrow { productService.changePrice(actual.id, Price(5_500L)) }
+        }
+    }
+
+    @Nested
+    @DisplayName("상품 조회")
+    inner class ProductRetrieve {
+
+        @Test
+        fun `상품의 목록을 조회할 수 있다`() {
+            productRepository.save(product(DisplayedName("아이스 아메리카노", profanityClient), 5_800L))
+            productRepository.save(product(DisplayedName("아이스 카페라떼", profanityClient), 6_000L))
+
+            val actual = productService.findAll()
+            assertThat(actual).hasSize(2)
+            assertThat(actual).map(ProductResponse::name, ProductResponse::price)
+                .contains(
+                    tuple(DisplayedName("아이스 아메리카노", profanityClient), Price(5_800L)),
+                    tuple(DisplayedName("아이스 카페라떼", profanityClient), Price(6_000L)),
+                )
         }
     }
 }

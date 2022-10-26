@@ -30,4 +30,9 @@ class ProductService(
             ?: throw NoSuchElementException("상품이 존재하지 않습니다. id: $id")
         product.changePrice(price)
     }
+
+    fun findAll(): List<ProductResponse> {
+        return productRepository.findAll()
+            .map { ProductResponse(it) }
+    }
 }
