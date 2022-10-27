@@ -3,20 +3,28 @@ package com.dailycoffee.menus.domain
 import com.dailycoffee.support.utils.IdGenerator
 import java.math.BigDecimal
 import java.util.UUID
+import javax.persistence.Column
+import javax.persistence.Embedded
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
+@Entity
+@Table(name = "menu")
 class Menu(
-    val id: UUID,
-    val name: String,
+    @Id @Column(columnDefinition = "BINARY(16)") val id: UUID,
+    @Column(nullable = false) val name: String,
     price: Price = Price.ZERO,
-    displayed: Boolean,
-    val menuGroupId: UUID,
-    val menuProducts: MenuProducts,
+    displayed: Boolean = true,
+    @Column(columnDefinition = "BINARY(16)") val menuGroupId: UUID,
+    @Embedded val menuProducts: MenuProducts,
 ) {
+    @Embedded
     var price: Price = price
-        private set
+        protected set
 
     var displayed: Boolean = displayed
-        private set
+        protected set
 
     init {
         validatePrice(price)

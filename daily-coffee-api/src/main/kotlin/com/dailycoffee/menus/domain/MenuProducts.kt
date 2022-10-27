@@ -1,6 +1,17 @@
 package com.dailycoffee.menus.domain
 
+import javax.persistence.CascadeType
+import javax.persistence.Embeddable
+import javax.persistence.JoinColumn
+import javax.persistence.OneToMany
+
+@Embeddable
 class MenuProducts(
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+    )
+    @JoinColumn(name = "menu_id")
     private var _menuProducts: MutableList<MenuProduct> = mutableListOf()
 ) {
     val menuProducts: List<MenuProduct>

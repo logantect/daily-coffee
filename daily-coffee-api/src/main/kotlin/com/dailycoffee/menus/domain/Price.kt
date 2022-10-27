@@ -1,11 +1,14 @@
 package com.dailycoffee.menus.domain
 
 import java.math.BigDecimal
+import javax.persistence.Column
+import javax.persistence.Embeddable
 
 private const val ZERO_NUMBER = 0L
 
+@Embeddable
 data class Price(
-    private val amount: BigDecimal
+    @Column(nullable = false) private val amount: BigDecimal
 ) {
     init {
         require(amount >= BigDecimal.ZERO)
