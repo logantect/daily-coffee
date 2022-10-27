@@ -28,6 +28,7 @@ class Menu(
 
     init {
         validatePrice(price)
+        require(menuProducts.isNotEmpty())
     }
 
     constructor(
