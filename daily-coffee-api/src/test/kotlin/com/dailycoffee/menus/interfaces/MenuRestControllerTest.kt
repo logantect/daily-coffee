@@ -1,7 +1,11 @@
 package com.dailycoffee.menus.interfaces
 
+import com.dailycoffee.menu
+import com.dailycoffee.menuGroup
+import com.dailycoffee.menuProduct
 import com.dailycoffee.menuProductRequest
 import com.dailycoffee.menuRequest
+import com.dailycoffee.menus.application.ChangePriceRequest
 import com.dailycoffee.menus.domain.MenuRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
@@ -65,6 +69,33 @@ class MenuRestControllerTest(
             body("displayed", `is`(true))
             body("menuGroupId", equalTo(menuGroupId.toString()))
             body("menuProducts.size()", `is`(1))
+            log().all()
+        }
+    }
+
+    @Test
+    fun `메뉴 가격 변경 요청에 응답으로 200 OK를 반환한다`() {
+        val menuGroup = menuGroup("추천")
+        val menu = menuRepository.save(
+            menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                true,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+            )
+        )
+
+        val request = ChangePriceRequest(price = BigDecimal.valueOf(4_000L))
+
+        Given {
+            contentType(ContentType.JSON)
+            body(request)
+            log().all()
+        } When {
+            patch("/api/v1/menus/{menuId}/price", menu.id)
+        } Then {
+            statusCode(HttpStatus.SC_OK)
             log().all()
         }
     }
