@@ -8,7 +8,7 @@ private const val ZERO_NUMBER = 0L
 
 @Embeddable
 data class Price(
-    @Column(nullable = false) private val amount: BigDecimal
+    @Column(nullable = false) val amount: BigDecimal
 ) {
     init {
         require(amount >= BigDecimal.ZERO)
