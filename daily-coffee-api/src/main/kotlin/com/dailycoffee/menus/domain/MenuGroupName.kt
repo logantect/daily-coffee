@@ -5,7 +5,7 @@ import javax.persistence.Embeddable
 
 @Embeddable
 data class MenuGroupName(
-    @Column(nullable = false) private val name: String
+    @Column(nullable = false) val name: String
 ) {
     init {
         require(name.isNotBlank())

@@ -11,4 +11,5 @@ interface MenuGroupRepository {
     fun save(menuGroup: MenuGroup): MenuGroup
     fun findById(id: UUID): Optional<MenuGroup>
     fun findAll(): List<MenuGroup>
+    fun deleteAll()
 }
