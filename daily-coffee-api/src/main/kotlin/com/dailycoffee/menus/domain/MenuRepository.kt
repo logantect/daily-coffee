@@ -9,4 +9,5 @@ interface MenuRepository {
     fun save(menu: Menu): Menu
     fun findById(id: UUID): Optional<Menu>
     fun findAll(): List<Menu>
+    fun deleteAll()
 }
