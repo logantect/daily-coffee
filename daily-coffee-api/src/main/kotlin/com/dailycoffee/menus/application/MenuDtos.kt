@@ -13,6 +13,10 @@ data class CreateMenuRequest(
     val menuProducts: List<MenuProductRequest>
 )
 
+data class ChangePriceRequest(
+    val price: BigDecimal,
+)
+
 data class MenuProductRequest(
     val productId: UUID,
     val price: BigDecimal,
