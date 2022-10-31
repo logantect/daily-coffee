@@ -5,6 +5,7 @@ import com.dailycoffee.menuProduct
 import com.dailycoffee.menus.domain.MenuRepository
 import com.dailycoffee.menus.infra.InMemoryMenuRepository
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.groups.Tuple
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -77,6 +78,40 @@ class MenuServiceTest {
             assertDoesNotThrow {
                 menuService.changePrice(menu.id, ChangePriceRequest(BigDecimal.valueOf(4_100L)))
             }
+        }
+    }
+
+    @Nested
+    @DisplayName("메뉴 조회")
+    inner class MenuRetrieve {
+        @Test
+        fun `메뉴의 목록을 조회할 수 있다`() {
+            menuRepository.save(
+                menu(
+                    "아이스 카페 아메리카노",
+                    BigDecimal.valueOf(4_500L),
+                    true,
+                    UUID.randomUUID(),
+                    listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+                )
+            )
+            menuRepository.save(
+                menu(
+                    "아이스 카페라떼",
+                    BigDecimal.valueOf(5_500L),
+                    true,
+                    UUID.randomUUID(),
+                    listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(5_500L), 1))
+                )
+            )
+
+            val actual = menuService.findAll()
+            assertThat(actual).hasSize(2)
+            assertThat(actual).map(MenuResponse::name, MenuResponse::price)
+                .contains(
+                    Tuple.tuple("아이스 카페 아메리카노", BigDecimal.valueOf(4_500L)),
+                    Tuple.tuple("아이스 카페라떼", BigDecimal.valueOf(5_500L)),
+                )
         }
     }
 }

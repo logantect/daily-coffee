@@ -36,4 +36,9 @@ class MenuService(
             ?: throw NoSuchElementException("메뉴가 존재하지 않습니다. id: $id")
         menu.changePrice(Price(command.price))
     }
+
+    fun findAll(): List<MenuResponse> {
+        return menuRepository.findAll()
+            .map { MenuResponse(it) }
+    }
 }
