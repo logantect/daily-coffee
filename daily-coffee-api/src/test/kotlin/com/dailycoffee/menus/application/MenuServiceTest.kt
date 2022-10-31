@@ -2,6 +2,8 @@ package com.dailycoffee.menus.application
 
 import com.dailycoffee.menu
 import com.dailycoffee.menuProduct
+import com.dailycoffee.menuProductRequest
+import com.dailycoffee.menuRequest
 import com.dailycoffee.menus.domain.MenuRepository
 import com.dailycoffee.menus.infra.InMemoryMenuRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -38,18 +40,12 @@ class MenuServiceTest {
         @Test
         fun `1개 이상의 등록된 상품으로 메뉴를 등록할 수 있다`() {
             val menuGroupId = UUID.randomUUID()
-            val createMenuRequest = CreateMenuRequest(
+            val createMenuRequest = menuRequest(
                 "아이스 카페 아메리카노",
                 BigDecimal.valueOf(4_500L),
                 true,
                 menuGroupId,
-                listOf(
-                    MenuProductRequest(
-                        productId = UUID.randomUUID(),
-                        price = BigDecimal.valueOf(4_500L),
-                        quantity = 1L,
-                    )
-                )
+                listOf(menuProductRequest(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1L))
             )
             val actual = menuService.create(createMenuRequest)
             assertThat(actual.id).isNotNull
