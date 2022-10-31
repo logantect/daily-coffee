@@ -5,6 +5,7 @@ import com.dailycoffee.menus.application.MenuGroupResponse
 import com.dailycoffee.menus.application.MenuGroupService
 import com.dailycoffee.support.interfaces.ApiResponse
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,5 +23,11 @@ class MenuGroupRestController(
         val menuGroup = menuGroupService.create(request)
         return ResponseEntity.created(URI.create("/api/v1/menu-groups/${menuGroup.id}"))
             .body(ApiResponse.success(menuGroup))
+    }
+
+    @GetMapping
+    fun getMenuGroups(): ResponseEntity<ApiResponse<List<MenuGroupResponse>>> {
+        val menuGroups = menuGroupService.findAll()
+        return ResponseEntity.ok(ApiResponse.success(menuGroups))
     }
 }
