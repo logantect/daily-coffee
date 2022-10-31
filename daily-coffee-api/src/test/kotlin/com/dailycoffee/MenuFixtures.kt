@@ -1,5 +1,7 @@
 package com.dailycoffee
 
+import com.dailycoffee.menus.application.CreateMenuRequest
+import com.dailycoffee.menus.application.MenuProductRequest
 import com.dailycoffee.menus.domain.Menu
 import com.dailycoffee.menus.domain.MenuGroup
 import com.dailycoffee.menus.domain.MenuProduct
@@ -31,3 +33,23 @@ fun menuProduct(productId: UUID, price: BigDecimal, quantity: Long): MenuProduct
         quantity = quantity
     )
 }
+
+fun menuRequest(
+    name: String,
+    price: BigDecimal,
+    displayed: Boolean,
+    menuGroupId: UUID,
+    menuProducts: List<MenuProductRequest>
+) = CreateMenuRequest(
+    name,
+    price,
+    displayed,
+    menuGroupId,
+    menuProducts
+)
+
+fun menuProductRequest(productId: UUID, price: BigDecimal, quantity: Long) = MenuProductRequest(
+    productId = productId,
+    price = price,
+    quantity = quantity,
+)
