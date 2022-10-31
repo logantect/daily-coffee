@@ -38,7 +38,6 @@ class MenuService(
     }
 
     fun findAll(): List<MenuResponse> {
-        return menuRepository.findAll()
-            .map { MenuResponse(it) }
+        return menuRepository.findAll().map { MenuResponse(it) }
     }
 }

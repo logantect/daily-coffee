@@ -33,7 +33,7 @@ class MenuServiceTest {
 
     @Nested
     @DisplayName("메뉴 등록")
-    inner class ProductCreate {
+    inner class MenuCreate {
 
         @Test
         fun `1개 이상의 등록된 상품으로 메뉴를 등록할 수 있다`() {

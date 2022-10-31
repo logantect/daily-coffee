@@ -18,4 +18,8 @@ class MenuGroupService(
         )
         return MenuGroupResponse(menuGroupRepository.save(menuGroupRequest))
     }
+
+    fun findAll(): List<MenuGroupResponse> {
+        return menuGroupRepository.findAll().map { MenuGroupResponse(it) }
+    }
 }
