@@ -9,4 +9,5 @@ interface OrderRepository {
     fun findById(id: UUID): Optional<Order>
 
     fun findAll(): List<Order>
+    fun deleteAll()
 }
