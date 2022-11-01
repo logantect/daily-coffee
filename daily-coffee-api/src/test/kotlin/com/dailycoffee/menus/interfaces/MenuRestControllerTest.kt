@@ -13,6 +13,7 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.apache.http.HttpStatus
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
@@ -96,6 +97,41 @@ class MenuRestControllerTest(
             patch("/api/v1/menus/{menuId}/price", menu.id)
         } Then {
             statusCode(HttpStatus.SC_OK)
+            log().all()
+        }
+    }
+
+    @Test
+    fun `메뉴 목록 조회 요청으로 200 OK와 메뉴 목록을 반환한다`() {
+        val menuGroup = menuGroup("추천")
+        menuRepository.save(
+            menu(
+                "아이스 카페 아메리카노",
+                BigDecimal.valueOf(4_500L),
+                true,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(4_500L), 1))
+            )
+        )
+
+        menuRepository.save(
+            menu(
+                "아이스 카페라떼",
+                BigDecimal.valueOf(5_500L),
+                true,
+                menuGroup.id,
+                listOf(menuProduct(UUID.randomUUID(), BigDecimal.valueOf(5_500L), 1))
+            )
+        )
+
+        Given {
+            contentType(ContentType.JSON)
+            log().all()
+        } When {
+            get("/api/v1/menus")
+        } Then {
+            statusCode(HttpStatus.SC_OK)
+            body("data.size()", CoreMatchers.`is`(2))
             log().all()
         }
     }
