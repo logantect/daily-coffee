@@ -1,5 +1,7 @@
 package com.dailycoffee
 
+import com.dailycoffee.deliveryorders.application.OrderLineItemsRequest
+import com.dailycoffee.deliveryorders.application.OrderRequest
 import com.dailycoffee.deliveryorders.domain.Order
 import com.dailycoffee.deliveryorders.domain.OrderLineItem
 import com.dailycoffee.deliveryorders.domain.OrderStatus
@@ -25,3 +27,14 @@ fun order(status: OrderStatus, deliveryAddress: String, orderLineItems: List<Ord
 fun orderLineItem(menuId: UUID, price: BigDecimal, quantity: Long): OrderLineItem {
     return OrderLineItem(menuId, price, quantity)
 }
+
+fun orderRequest(deliveryAddress: String, orderLineItems: List<OrderLineItemsRequest>) = OrderRequest(
+    deliveryAddress = deliveryAddress,
+    orderLineItems = orderLineItems
+)
+
+fun orderLineItemsRequest(menuId: UUID, price: BigDecimal, quantity: Long) = OrderLineItemsRequest(
+    menuId = menuId,
+    price = price,
+    quantity = quantity
+)
