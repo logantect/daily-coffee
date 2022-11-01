@@ -6,6 +6,7 @@ import com.dailycoffee.menus.application.MenuResponse
 import com.dailycoffee.menus.application.MenuService
 import com.dailycoffee.support.interfaces.ApiResponse
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -35,5 +36,11 @@ class MenuRestController(
     ): ResponseEntity<Unit> {
         menuService.changePrice(menuId, request)
         return ResponseEntity.ok().build()
+    }
+
+    @GetMapping
+    fun getMenus(): ResponseEntity<ApiResponse<List<MenuResponse>>> {
+        val menuGroups = menuService.findAll()
+        return ResponseEntity.ok(ApiResponse.success(menuGroups))
     }
 }
