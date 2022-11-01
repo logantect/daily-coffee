@@ -18,7 +18,7 @@ class OrderLineItems(
         name = "order_id", nullable = false, updatable = false,
         foreignKey = ForeignKey(name = "fk_order_item_order_id_ref_order_id")
     )
-    private var _orderLineItems: MutableList<OrderLineItem>
+    private var _orderLineItems: MutableList<OrderLineItem> = mutableListOf()
 ) {
     val orderLineItems: List<OrderLineItem>
         get() = _orderLineItems.toList()
