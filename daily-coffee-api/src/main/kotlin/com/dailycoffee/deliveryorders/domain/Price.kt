@@ -2,9 +2,12 @@ package com.dailycoffee.deliveryorders.domain
 
 import com.dailycoffee.menus.domain.Quantity
 import java.math.BigDecimal
+import javax.persistence.Column
+import javax.persistence.Embeddable
 
+@Embeddable
 data class Price(
-    private val amount: BigDecimal
+    @Column(nullable = false) val amount: BigDecimal
 ) {
     init {
         require(amount >= BigDecimal.ZERO)
