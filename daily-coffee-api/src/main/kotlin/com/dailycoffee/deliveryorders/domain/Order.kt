@@ -3,16 +3,27 @@ package com.dailycoffee.deliveryorders.domain
 import com.dailycoffee.support.utils.IdGenerator
 import java.time.ZonedDateTime
 import java.util.UUID
+import javax.persistence.Column
+import javax.persistence.Embedded
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.Id
+import javax.persistence.Table
 
+@Entity
+@Table(name = "orders")
 class Order(
-    val id: UUID,
+    @Id @Column(columnDefinition = "BINARY(16)") val id: UUID,
     status: OrderStatus,
-    val orderDateTime: ZonedDateTime,
-    val deliveryAddress: DeliveryAddress,
-    val orderLineItems: OrderLineItems,
+    @Column(nullable = false) val orderDateTime: ZonedDateTime,
+    @Embedded val deliveryAddress: DeliveryAddress,
+    @Embedded val orderLineItems: OrderLineItems,
 ) {
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     var status: OrderStatus = status
-        private set
+        protected set
 
     constructor(
         deliveryAddress: String,

@@ -1,7 +1,11 @@
 package com.dailycoffee.deliveryorders.domain
 
+import javax.persistence.Column
+import javax.persistence.Embeddable
+
+@Embeddable
 data class DeliveryAddress(
-    val address: String,
+    @Column(nullable = false) val address: String,
 ) {
     init {
         require(address.isNotBlank())
