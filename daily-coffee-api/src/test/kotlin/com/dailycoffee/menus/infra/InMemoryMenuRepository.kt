@@ -19,6 +19,13 @@ class InMemoryMenuRepository : MenuRepository {
         return storage.values.toList()
     }
 
+    override fun findAllByIdIn(ids: List<UUID>): List<Menu> {
+        return storage.values.stream()
+            .filter { ids.contains(it.id) }
+            .map { it }
+            .toList()
+    }
+
     override fun deleteAll() {
         storage.clear()
     }

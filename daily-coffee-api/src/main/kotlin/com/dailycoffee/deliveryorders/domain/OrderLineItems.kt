@@ -1,5 +1,6 @@
 package com.dailycoffee.deliveryorders.domain
 
+import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Embeddable
 import javax.persistence.FetchType
@@ -22,4 +23,8 @@ class OrderLineItems(
 ) {
     val orderLineItems: List<OrderLineItem>
         get() = _orderLineItems.toList()
+
+    fun toMenuIds(): List<UUID> {
+        return _orderLineItems.map { it.menuId }
+    }
 }

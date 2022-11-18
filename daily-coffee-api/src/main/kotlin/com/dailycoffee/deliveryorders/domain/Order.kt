@@ -76,8 +76,4 @@ class Order(
         require(status.isDelivered())
         this.status = OrderStatus.COMPLETED
     }
-
-    fun getOrderLineItems(): List<OrderLineItem> {
-        return orderLineItems.orderLineItems
-    }
 }
