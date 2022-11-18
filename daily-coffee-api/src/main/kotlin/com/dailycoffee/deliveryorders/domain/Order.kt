@@ -48,6 +48,10 @@ class Order(
         OrderLineItems(orderLineItems.toMutableList())
     )
 
+    fun place(orderValidator: OrderValidator) {
+        orderValidator.validate(this)
+    }
+
     fun accept() {
         require(status.isWaiting())
         this.status = OrderStatus.ACCEPTED
@@ -71,5 +75,9 @@ class Order(
     fun complete() {
         require(status.isDelivered())
         this.status = OrderStatus.COMPLETED
+    }
+
+    fun getOrderLineItems(): List<OrderLineItem> {
+        return orderLineItems.orderLineItems
     }
 }
