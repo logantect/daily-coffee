@@ -1,5 +1,6 @@
 package com.dailycoffee.products.interfaces
 
+import com.dailycoffee.IntegrationTest
 import com.dailycoffee.products.application.ChangePriceRequest
 import com.dailycoffee.products.application.CreateProductRequest
 import com.dailycoffee.products.application.ProductService
@@ -13,16 +14,13 @@ import org.apache.http.HttpStatus
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.TestConstructor
 import java.math.BigDecimal
 
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@DisplayName("상품 통합 테스트")
+@IntegrationTest
 class ProductRestControllerTest(
     @LocalServerPort private val port: Int,
     private val productRepository: ProductRepository,
