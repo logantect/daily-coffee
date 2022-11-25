@@ -66,7 +66,7 @@ class OrderServiceTest {
                 val menu = menuRepository.save(
                     menu(
                         "아이스 카페 아메리카노",
-                        BigDecimal.valueOf(4_500L),
+                        BigDecimal.valueOf(5_800L),
                         true,
                         menuGroup.id,
                         listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
@@ -119,6 +119,18 @@ class OrderServiceTest {
 
             @Test
             fun `예외가 발생한다`() {
+                val product = productRepository.save(product(DisplayedName("아이스 아메리카노", profanityClient), 5_800L))
+                val menuGroup = menuGroupRepository.save(menuGroup("추천"))
+                val menu = menuRepository.save(
+                    menu(
+                        "아이스 카페 아메리카노",
+                        BigDecimal.valueOf(5_800L),
+                        true,
+                        menuGroup.id,
+                        listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
+                    )
+                )
+
                 val orderRequest = OrderRequest(
                     deliveryAddress = "서울특별시 강남구 논현로 656",
                     orderLineItems = listOf(
@@ -151,7 +163,7 @@ class OrderServiceTest {
                 val menu = menuRepository.save(
                     menu(
                         "아이스 카페 아메리카노",
-                        BigDecimal.valueOf(4_500L),
+                        BigDecimal.valueOf(5_800L),
                         true,
                         menuGroup.id,
                         listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
@@ -190,7 +202,7 @@ class OrderServiceTest {
                 val menu = menuRepository.save(
                     menu(
                         "아이스 카페 아메리카노",
-                        BigDecimal.valueOf(4_500L),
+                        BigDecimal.valueOf(5_800L),
                         true,
                         menuGroup.id,
                         listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
@@ -229,7 +241,7 @@ class OrderServiceTest {
                 val menu = menuRepository.save(
                     menu(
                         "아이스 카페 아메리카노",
-                        BigDecimal.valueOf(4_500L),
+                        BigDecimal.valueOf(5_800L),
                         false,
                         menuGroup.id,
                         listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
@@ -237,11 +249,50 @@ class OrderServiceTest {
                 )
 
                 val orderRequest = OrderRequest(
-                    deliveryAddress = "",
+                    deliveryAddress = "서울특별시 강남구 논현로 656",
                     orderLineItems = listOf(
                         OrderLineItemsRequest(
                             menuId = menu.id,
                             price = BigDecimal.valueOf(5_800L),
+                            quantity = 1
+                        )
+                    )
+                )
+
+                assertThatIllegalArgumentException().isThrownBy {
+                    orderService.create(orderRequest)
+                }
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("주문한 메뉴의 가격이 실제 메뉴가격과 불일치한 경우")
+    inner class OrderCase6 {
+
+        @Nested
+        @DisplayName("해당 주문을 요청하면")
+        inner class PlaceOrder {
+            @Test
+            fun `예외가 발생한다`() {
+                val product = productRepository.save(product(DisplayedName("아이스 아메리카노", profanityClient), 5_800L))
+                val menuGroup = menuGroupRepository.save(menuGroup("추천"))
+                val menu = menuRepository.save(
+                    menu(
+                        "아이스 카페 아메리카노",
+                        BigDecimal.valueOf(5_800L),
+                        false,
+                        menuGroup.id,
+                        listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
+                    )
+                )
+
+                val orderRequest = OrderRequest(
+                    deliveryAddress = "서울특별시 강남구 논현로 656",
+                    orderLineItems = listOf(
+                        OrderLineItemsRequest(
+                            menuId = menu.id,
+                            price = BigDecimal.valueOf(5_000L),
                             quantity = 1
                         )
                     )
