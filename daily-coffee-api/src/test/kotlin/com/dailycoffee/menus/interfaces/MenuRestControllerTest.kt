@@ -1,5 +1,6 @@
 package com.dailycoffee.menus.interfaces
 
+import com.dailycoffee.IntegrationTest
 import com.dailycoffee.menu
 import com.dailycoffee.menuGroup
 import com.dailycoffee.menuProduct
@@ -19,17 +20,14 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.TestConstructor
 import java.math.BigDecimal
 import java.util.UUID
 
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@DisplayName("메뉴 통합 테스트")
+@IntegrationTest
 class MenuRestControllerTest(
     @LocalServerPort private val port: Int,
     private val menuRepository: MenuRepository

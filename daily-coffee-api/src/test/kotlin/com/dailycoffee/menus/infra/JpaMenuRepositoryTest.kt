@@ -1,20 +1,18 @@
 package com.dailycoffee.menus.infra
 
+import com.dailycoffee.RepositoryTest
 import com.dailycoffee.menu
 import com.dailycoffee.menuGroup
 import com.dailycoffee.menuProduct
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.TestConstructor
 import java.math.BigDecimal
 import java.util.UUID
 
-@DataJpaTest
-@ActiveProfiles("test")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@DisplayName("메뉴 저장소 테스트")
+@RepositoryTest
 class JpaMenuRepositoryTest(
     private val menuRepository: JpaMenuRepository
 ) {

@@ -1,18 +1,16 @@
 package com.dailycoffee.products.infra
 
+import com.dailycoffee.RepositoryTest
 import com.dailycoffee.product
 import com.dailycoffee.products.domain.DisplayedName
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.TestConstructor
 
-@DataJpaTest
-@ActiveProfiles("test")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@DisplayName("상품 저장소 테스트")
+@RepositoryTest
 internal class ProductRepositoryTest(
     private val productRepository: JpaProductRepository,
 ) {
