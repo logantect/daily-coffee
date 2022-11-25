@@ -66,7 +66,7 @@ class OrderRestControllerTest(
             val menu = menuRepository.save(
                 menu(
                     "아이스 카페 아메리카노",
-                    BigDecimal.valueOf(4_500L),
+                    BigDecimal.valueOf(5_500L),
                     true,
                     menuGroup.id,
                     listOf(menuProduct(product.id, BigDecimal.valueOf(5_800L), 1))
@@ -76,7 +76,7 @@ class OrderRestControllerTest(
             val request = orderRequest(
                 "서울특별시 강남구 논현로 656",
                 listOf(
-                    orderLineItemsRequest(menu.id, BigDecimal.valueOf(4_500L), 1)
+                    orderLineItemsRequest(menu.id, BigDecimal.valueOf(5_500L), 1)
                 )
             )
 

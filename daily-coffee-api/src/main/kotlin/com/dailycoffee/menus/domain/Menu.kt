@@ -68,6 +68,14 @@ class Menu(
         menuProducts.removeMenuProduct(menuProduct)
     }
 
+    fun isSatisfiedBy(price: BigDecimal): Boolean {
+        return this.price == Price(price)
+    }
+
+    fun isHidden(): Boolean {
+        return !this.displayed
+    }
+
     private fun validatePrice(price: Price) {
         require(menuProducts.isGreaterThanOrEqualsTotalPrice(price))
     }
