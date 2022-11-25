@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.web.server.LocalServerPort
 import java.math.BigDecimal
 
+@DisplayName("주문 통합 테스트")
 @IntegrationTest
 class OrderRestControllerTest(
     @LocalServerPort private val port: Int,
@@ -49,6 +50,9 @@ class OrderRestControllerTest(
     internal fun tearDown() {
         RestAssured.reset()
         orderRepository.deleteAll()
+        menuGroupRepository.deleteAll()
+        menuRepository.deleteAll()
+        productRepository.deleteAll()
     }
 
     @Nested
