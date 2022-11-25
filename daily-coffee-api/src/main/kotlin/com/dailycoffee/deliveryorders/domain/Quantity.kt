@@ -10,6 +10,6 @@ data class Quantity(
     @Column(nullable = false) val quantity: Long
 ) {
     init {
-        require(quantity >= MINIMUM_QUANTITY_NUMBER)
+        require(quantity > MINIMUM_QUANTITY_NUMBER)
     }
 }
